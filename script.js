@@ -1,22 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Turn pages when click next btn and prev btn
     const pageTurnBtn = document.querySelectorAll('.nextprev-btn');
-    const pages = document.querySelectorAll('.book-page.page-right');
-    const contactMeBtn = document.querySelector('.btn.contact-me');
-    const backProfileBtn = document.querySelector('.back-profile');
-    const coverRight = document.querySelector('.cover.cover-right');
-    const pageLeft = document.querySelector('.book-page.page-left');
-
-    let totalPages = pages.length;
-    let pageNumber = 0;
-
-    // Function to reverse the index
-    function reverseIndex() {
-        pageNumber--;
-        if (pageNumber < 0) {
-            pageNumber = totalPages - 1;
-        }
-    }
 
     pageTurnBtn.forEach((el, index) => {
         el.onclick = () => {
@@ -37,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Contact Me button click
+    const pages = document.querySelectorAll('.book-page.page-right');
+    const contactMeBtn = document.querySelector('.btn.contact-me');
+
     contactMeBtn.onclick = () => {
         pages.forEach((page, index) => {
             setTimeout(() => {
@@ -47,6 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }, (index + 1) * 200 + 100);
         });
     }
+
+    // Create Reverse Index Function
+    let totalPages = pages.length;
+    let pageNumber = 0;
+
+    function reverseIndex() {
+        pageNumber--;
+        if (pageNumber < 0) {
+            pageNumber = totalPages - 1;
+        }
+    }
+
+    // Back Profile Button Click
+    const backProfileBtn = document.querySelector('.back-profile');
 
     backProfileBtn.onclick = () => {
         pages.forEach((_, index) => {
@@ -62,6 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Opening animation
+    const coverRight = document.querySelector('.cover.cover-right');
+    const pageLeft = document.querySelector('.book-page.page-left');
+
+    // Opening animation (cover right animation)
     setTimeout(() => {
         coverRight.classList.add('turn');
     }, 2100);
@@ -70,10 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
         coverRight.style.zIndex = -1;
     }, 2800);
 
+    // Opening animation (page left or profile page animation)
     setTimeout(() => {
         pageLeft.style.zIndex = 20;
     }, 3200);
 
+    // Opening animation (All Page right animation)
     pages.forEach((_, index) => {
         setTimeout(() => {
             reverseIndex();
@@ -84,4 +92,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }, (index + 1) * 200 + 2100);
     });
+
 });
